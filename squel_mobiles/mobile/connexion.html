@@ -1,0 +1,50 @@
+#FILTRE{compacte_head}
+<!DOCTYPE html>
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="#LANG"class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]--> 
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title><:lien_connecter:> - [(#NOM_SITE_ITWX|textebrut)]</title>
+<meta name="robots" content="none" />
+[(#REM|f_jQuery)]
+<script type='text/javascript'>
+<!--
+jQuery(function(){ jQuery('input#var_login').focus();
+jQuery('a#spip_pass').click(function(){window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=330'); return false;});
+});
+// -->
+</script>
+<INCLURE{fond=inc/inc-head}>
+</head>
+
+<body>
+<div id="mob">
+
+  [(#REM) TOOL BARRE ]
+  <INCLURE{fond=inc/inc-navBar}/> 
+  
+  <div class="contenu"> 
+  [(#REM) Est-ce qu'on se connecte a l'espace prive ou pas ? ]
+    [(#ENV{url}|=={''}|?{#SET{prive,' '}})]
+    [(#ENV{url}|match{^#EVAL{_DIR_RESTREINT_ABS}}|?{#SET{prive,' '}})]
+    [(#GET{prive})<h3 class="spip"><:login_acces_prive:></h3>]
+    
+    #MENU_LANG_ECRIRE 
+  </div>
+  
+  [(#FORMULAIRE_LOGIN{#ENV{url}|sinon{#URL_ECRIRE{accueil}}})]
+
+  [(#REM) Pied ]
+  <div class="group" style="height:17px"></div>
+  <div id="pied">
+	 <BOUCLE_annee(ARTICLES){par date}{0,1}>[(#DATE|annee)]</BOUCLE_annee>-</B_annee>[(#DATE|annee) ]#NOM_SITE_SPIP<br />
+     <a href="http://www.spip.net/" title="<:site_realise_avec_spip:>"><img src="#CHEMIN{squel_mobiles/images/themes/spip.png}" alt="SPIP" width="48" height="16" /></a> - <:itwx:copyright:>
+  </div>	
+  
+</div><!--#page-->
+</body>
+</html>

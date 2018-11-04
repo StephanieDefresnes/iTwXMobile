@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="#LANG"class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]--> 
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title><:poster_message:> - [(#NOM_SITE_ITWX|textebrut)]</title>
+<INCLURE{fond=inc/inc-head}>
+<meta name="robots" content="none" />
+</head>
+
+<body>
+<div id="mob">
+
+  [(#REM) TOOL BARRE ]
+  <INCLURE{fond=inc/inc-navBar}/> 
+  
+  [(#REM) Contenu : poster un message dans le forum ]
+  <div class="contenu">
+    <div class="cartouche">
+      <h1 class="entry-title"><:poster_message:></h1>
+    </div>
+    <div class="menu articles">
+      <h2><:en_reponse:></h2>
+	  
+            <BOUCLE_forum_parent(FORUMS) {id_forum}>
+            <h3>#TITRE</h3>
+            <small>[(#DATE|affdate_jourcourt)][&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> (#NOM)]</small>
+            [<div class="introduction">(#INTRODUCTION|lignes_longues)</div>]
+            </BOUCLE_forum_parent>
+            
+            <BOUCLE_article(ARTICLES) {id_article}>
+            <h3>#TITRE</h3>
+            <small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
+            [<div class="introduction">(#INTRODUCTION)</div>]
+            </BOUCLE_article>
+            
+            <BOUCLE_breve(BREVES) {id_breve}>
+            <h3>#TITRE</h3>
+            <small>[(#DATE|affdate_jourcourt)]</small>
+            [<div class="introduction">(#INTRODUCTION)</div>]
+            </BOUCLE_breve>
+            
+            <//B_forum_parent>
+	  
+    </div>
+  </div><!--#contenu-->
+  
+  #FORMULAIRE_FORUM
+  
+  [(#REM) Pied ]
+  <div class="group" style="height:17px"></div>
+  <div id="pied">
+     <a href="http://www.spip.net/" title="<:site_realise_avec_spip:>"><img src="#CHEMIN{spip.png}" alt="SPIP" width="48" height="16" /></a> - <:itwx:copyright:>
+  </div>	
+
+</div><!--#page-->
+</body>
+</html>
